@@ -1,18 +1,22 @@
-#include "array_list.h"
+#include "static_linear_list.h"
 
-void startArrayList(ARRAY_LIST* list) {
+void StaticLinearList_Init(STATIC_LINEAR_LIST* list) {
   list->size = 0;
 }
 
-int getSize(ARRAY_LIST* list) {
+int StaticLinearList_GetSize(STATIC_LINEAR_LIST* list) {
   return list->size;
 }
 
-bool isFull(ARRAY_LIST* list) {
+bool StaticLinearList_IsFull(STATIC_LINEAR_LIST* list) {
   return list->size == MAX_LENGTH;
 }
 
-void printList(ARRAY_LIST* list) {
+bool SataticLinearList_isEmpty(STATIC_LINEAR_LIST* list) {
+  return list->size == 0;
+}
+
+void StaticLinearList_print(STATIC_LINEAR_LIST* list) {
   int index;
   printf("List: [ ");
   for (index=0; index < list->size; index++)
@@ -20,7 +24,7 @@ void printList(ARRAY_LIST* list) {
   printf("]\n");
 }
 
-int linearSearch(ARRAY_LIST* list, ID_KEY searchedKey) {
+int StaticLinearList_LinearSearch(STATIC_LINEAR_LIST* list, ID_KEY searchedKey) {
   int index = 0;
   while (index < list->size) {
     if ( searchedKey == list->A[index].key ) return index;
@@ -29,7 +33,7 @@ int linearSearch(ARRAY_LIST* list, ID_KEY searchedKey) {
   return -1;
 }
 
-int sentinelLinearSearch(ARRAY_LIST* list, ID_KEY searchedKey) {
+int StaticLinearList_SentinelSearch(STATIC_LINEAR_LIST* list, ID_KEY searchedKey) {
   int index = 0;
   list->A[list->size].key = searchedKey;
   while (list->A[index].key != searchedKey) index++;
@@ -37,7 +41,7 @@ int sentinelLinearSearch(ARRAY_LIST* list, ID_KEY searchedKey) {
   return index;
 }
 
-int binarySearch(ARRAY_LIST* list, ID_KEY searchedKey) {
+int StaticLinearList_BinarySearch(STATIC_LINEAR_LIST* list, ID_KEY searchedKey) {
   int left = 0, rigth = list->size - 1, middle;
   while (left <= rigth) {
     middle = (left + rigth) / 2;
@@ -50,9 +54,9 @@ int binarySearch(ARRAY_LIST* list, ID_KEY searchedKey) {
   return -1;
 }
 
-bool insertInPosition(ARRAY_LIST* list, RECORD item, int position) {
+bool StaticLinearList_InsertAt(STATIC_LINEAR_LIST* list, RECORD item, int position) {
   int innerIndex;
-  if ( isFull(list) || position < 0 || position > list->size)
+  if ( StaticLinearList_IsFull(list) || position < 0 || position > list->size)
     return false;
   for (innerIndex = list->size; innerIndex > position; innerIndex--) list->A[innerIndex] = list->A[innerIndex -1];
   list->A[position] = item;
@@ -60,8 +64,8 @@ bool insertInPosition(ARRAY_LIST* list, RECORD item, int position) {
   return true;
 }
 
-bool insertInOrder(ARRAY_LIST* list, RECORD item) {    
-  if (isFull(list)) return false;
+bool StaticLinearList_InsertInOrder(STATIC_LINEAR_LIST* list, RECORD item) {    
+  if (StaticLinearList_IsFull(list)) return false;
   int position = list->size;
   while (position  > 0 && list->A[position-1].key > item.key) {
     list->A[position] = list->A[position-1];
@@ -72,18 +76,42 @@ bool insertInOrder(ARRAY_LIST* list, RECORD item) {
   return true;
 }
 
-RECORD removeItem(ID_KEY removedItem, ARRAY_LIST* list) {
-  RECORD removedRecord = { -1 };
-  int position, index;
-  position = binarySearch(list, removedItem);
-  if (position != -1) removedRecord = list->A[position];
+RECORD* StaticLinearList_GetAt(int position, STATIC_LINEAR_LIST* list) {
+  if (position < 0 || position >= list->size ) return NULL;
+  return &(list->A[position]);
+}
+
+RECORD* StaticLinearList_RemoveByKey(ID_KEY removedItem, STATIC_LINEAR_LIST* list) {    
+    int position = StaticLinearList_BinarySearch(list, removedItem);
+    if (position == -1) return NULL;
+
+    RECORD* removedRecord = (RECORD*)malloc(sizeof(RECORD));
+    if (!removedRecord) return NULL;
+    
+    *removedRecord = list->A[position];
+
+    for (int index = position; index < list->size - 1; index++) {
+        list->A[index] = list->A[index + 1];
+    }
+    
+    list->size--;
+
+    return removedRecord;
+}
+
+RECORD* StaticLinearList_RemoveAt(int position, STATIC_LINEAR_LIST* list) {
+  RECORD* removedRecord = StaticLinearList_GetAt(position, list);
+  int index;
+  if (position < 0 || position >= list->size || removedRecord == NULL) return NULL;  
+  
   for (index =  position; index < list->size; index++ )
     list->A[index] = list->A[index+1];
   list->size--;
+  
   return removedRecord;
 }
 
-bool freeList(ARRAY_LIST* list) {  
+bool StaticLinearList_Clear(STATIC_LINEAR_LIST* list) {  
   list->size = 0;
   return true;
 }

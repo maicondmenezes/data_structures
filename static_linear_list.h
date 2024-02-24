@@ -6,6 +6,7 @@ Creation Date: 21/02/2024
 Version: 0.1.0
 */
 #include<stdio.h>
+#include<stdlib.h>
 #include<limits.h>
 #include<stdbool.h>
 #define MAX_LENGTH 10000
@@ -24,111 +25,140 @@ typedef struct{
   // Array of records, it's have MAX_LENGTH+1 to use sentinel linear search
   RECORD A[MAX_LENGTH+1];
   int size;
-} ARRAY_LIST;
+} STATIC_LINEAR_LIST;
 
-/* Function: startArrayList
+/* Function: StaticLinearList_Init
   Description: This function is used to start a list, it's set the size of the list to 0
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be started
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be started
   Return:
     void
 */
-void startArrayList(ARRAY_LIST* list);
+void StaticLinearList_Init(STATIC_LINEAR_LIST* list);
 
-/* Function: getSize
+/* Function: StaticLinearList_GetSize
   Description: This function is used to get the size of the list
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be get the size
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be get the size
   Return:
     int: The size of the list
 */
-int getSize(ARRAY_LIST* list);
+int StaticLinearList_GetSize(STATIC_LINEAR_LIST* list);
 
-/* Function: isFull
+/* Function: StaticLinearList_IsFull
   Description: This function is used to check if the list is full
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be checked
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be checked
   Return:
     bool: If the list is full, the function returns true, otherwise, the function returns false
 */
-bool isFull(ARRAY_LIST* list);
+bool StaticLinearList_IsFull(STATIC_LINEAR_LIST* list);
 
-/* Function: printList
+/* Function: SataticLinearList_isEmpty
+  Description: This function is used to check if the list is empty
+  Parameters:
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be checked
+  Return:
+    bool: If the list is empty, the function returns true, otherwise, the function returns false
+*/
+bool SataticLinearList_isEmpty(STATIC_LINEAR_LIST* list);
+
+/* Function: StaticLinearList_print
   Description: This function is used to print the list
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be printed
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be printed
   Return:
     void
 */
-void printList(ARRAY_LIST* list);
+void StaticLinearList_print(STATIC_LINEAR_LIST* list);
 
-/* Function: linearSearch
+/* Function: StaticLinearList_LinearSearch
   Description: This function is used to search for a record in the list
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be searched
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be searched
     ID_KEY searchedKey: The key of the record that will be searched
   Return:
     int: The position of the record in the list, if the record is not found, the function returns -1
 */
-int linearSearch(ARRAY_LIST* list, ID_KEY searchedKey);
+int StaticLinearList_LinearSearch(STATIC_LINEAR_LIST* list, ID_KEY searchedKey);
 
-/* Function: sentinelLinearSearch
+/* Function: StaticLinearList_SentinelSearch
   Description: This function is used to search for a record in the list using sentinel linear search
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be searched
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be searched
     ID_KEY searchedKey: The key of the record that will be searched
   Return:
     int: The position of the record in the list, if the record is not found, the function returns -1
 
 */
-int sentinelLinearSearch(ARRAY_LIST* list, ID_KEY searchedKey);
+int StaticLinearList_SentinelSearch(STATIC_LINEAR_LIST* list, ID_KEY searchedKey);
 
-/* Function: binarySearch
+/* Function: StaticLinearList_BinarySearch
   Description: This function is used to search for a record in the list using binary search
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be searched
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be searched
     ID_KEY searchedKey: The key of the record that will be searched
   Return:
     int: The position of the record in the list, if the record is not found, the function returns -1
 */
-int binarySearch(ARRAY_LIST* list, ID_KEY searchedKey);
+int StaticLinearList_BinarySearch(STATIC_LINEAR_LIST* list, ID_KEY searchedKey);
 
-/* Function: insertInPosition
+/* Function: StaticLinearList_InsertAt
   Description: This function is used to insert a record in a specific position in the list
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be inserted the record
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be inserted the record
     RECORD item: The record that will be inserted
     int position: The position that the record will be inserted
   Return:
     bool: If the record was inserted, the function returns true, otherwise, the function returns false
 */
-bool insertInPosition(ARRAY_LIST* list, RECORD item, int position);
+bool StaticLinearList_InsertAt(STATIC_LINEAR_LIST* list, RECORD item, int position);
 
-/* Function: insertInOrder
+/* Function: StaticLinearList_InsertInOrder
   Description: This function is used to insert a record in the list in order
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be inserted the record
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be inserted the record
     RECORD item: The record that will be inserted
   Return:
     bool: If the record was inserted, the function returns true, otherwise, the function returns false
 */
-bool insertInOrder(ARRAY_LIST* list, RECORD item);
+bool StaticLinearList_InsertInOrder(STATIC_LINEAR_LIST* list, RECORD item);
 
-/* Function: removeItem
+/* Function StaticLinearList_GetAt
+  Description: This function is used to get a record from the list
+  Parameters:
+    int position: The position of the record that will be get
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be get the record
+  Return:
+    *RECORD: Pointer to the record that was get or NULL if the position is invalid
+*/
+RECORD* StaticLinearList_GetAt(int position, STATIC_LINEAR_LIST* list);
+
+/* Function: StaticLinearList_RemoveByKey
   Description: This function is used to remove a record from the list
   Parameters:
     ID_KEY removedItem: The key of the record that will be removed
-    ARRAY_LIST* list: Pointer to the list that will be removed the record
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be removed the record
   Return:
-    bool: If the record was removed, the function returns true, otherwise, the function returns false
+    RECORD: Pointer to the record that was removed or NULL if the record was not found
 */
-RECORD removeItem(ID_KEY removedItem, ARRAY_LIST* list);
+RECORD* StaticLinearList_RemoveByKey(ID_KEY removedItem, STATIC_LINEAR_LIST* list);
 
-/* Function: restartList
+/* Function: StaticLinearList_RemoveAt
+  Description: This function is used to remove a record from the list
+  Parameters:
+    int position: The position of the record that will be removed
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be removed the record
+  Return:
+    RECORD: Pointer to the record that was removed or NULL if the position is invalid
+*/
+RECORD* StaticLinearList_RemoveAt(int position, STATIC_LINEAR_LIST* list);
+
+/* Function: StaticLinearList_Clear
   Description: This function is used to restart the list
   Parameters:
-    ARRAY_LIST* list: Pointer to the list that will be restarted
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be restarted
   Return:
     bool: If the list was restarted, the function returns true, otherwise, the function returns false
 */
-bool freeList(ARRAY_LIST* list);
+bool StaticLinearList_Clear(STATIC_LINEAR_LIST* list);
