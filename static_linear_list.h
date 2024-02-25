@@ -1,5 +1,5 @@
 /* 
-Description: This program is a collection of data structures and algorithms related to this data structures based on lessons from Data Structure discipline on Computing Engeneering course at UNIVESP.
+Description: This file implements Linear List using static memory allocation.
 
 Author: Maicon de Menezes
 Creation Date: 21/02/2024
