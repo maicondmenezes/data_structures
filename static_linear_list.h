@@ -134,6 +134,24 @@ bool StaticLinearList_InsertInOrder(STATIC_LINEAR_LIST* list, RECORD item);
 */
 RECORD* StaticLinearList_GetAt(int position, STATIC_LINEAR_LIST* list);
 
+/* Function: StaticLinearList_GetFirst
+  Description: This function is used to get the first record from the list
+  Parameters:
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be get the record
+  Return:
+    *RECORD: Pointer to the record that was get or NULL if the list is empty
+*/
+RECORD* StaticLinearList_GetFirst(STATIC_LINEAR_LIST* list);
+
+/* Function: StaticLinearList_GetLast
+  Description: This function is used to get the last record from the list
+  Parameters:
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be get the record
+  Return:
+    *RECORD: Pointer to the record that was get or NULL if the list is empty
+*/
+RECORD* StaticLinearList_GetLast(STATIC_LINEAR_LIST* list);
+
 /* Funcion StaticLinearList_GetByKey
   Description: This function is used to get a record from the list using it's key
   Parameters:

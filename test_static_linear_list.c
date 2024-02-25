@@ -151,6 +151,19 @@ void test_getAt_success() {
     CU_ASSERT_EQUAL(item->key, knownKey);
 }
 
+void test_getFirst_success() {    
+    RECORD* item = StaticLinearList_GetFirst(&globalList);
+    CU_ASSERT_PTR_NOT_NULL(item);
+    CU_ASSERT_EQUAL(item->key, knownKey);
+}
+
+void test_getLast_success() {
+    RECORD* expectedLastItem = StaticLinearList_GetAt(SAMPLES_AMOUNT, &globalList);
+    RECORD* item = StaticLinearList_GetLast(&globalList);
+    CU_ASSERT_PTR_NOT_NULL(item);
+    CU_ASSERT_EQUAL(item->key, expectedLastItem->key);
+}
+
 void test_getByKey_success() {
     RECORD* item = StaticLinearList_GetByKey(knownKey, &globalList, true);
     CU_ASSERT_PTR_NOT_NULL(item);
@@ -200,6 +213,8 @@ int main() {
     CU_add_test(pSuite, "test_insertInPosition_empty_list", test_insertAt_empty_list);
     CU_add_test(pSuite, "test_insertInOrder_empty_list", test_insertInOrder_empty_list);
     CU_add_test(pSuite, "test_getAt_success", test_getAt_success);
+    CU_add_test(pSuite, "test_getFirst_success", test_getFirst_success);
+    CU_add_test(pSuite, "test_getLast_success", test_getLast_success);
     CU_add_test(pSuite, "test_getByKey_success", test_getByKey_success);
     CU_add_test(pSuite, "test_removeByKey", test_removeByKey);
     CU_add_test(pSuite, "test_removeAt", test_removeAt);

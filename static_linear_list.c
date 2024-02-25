@@ -81,6 +81,14 @@ RECORD* StaticLinearList_GetAt(int position, STATIC_LINEAR_LIST* list) {
   return &(list->A[position]);
 }
 
+RECORD* StaticLinearList_GetFirst(STATIC_LINEAR_LIST* list) {
+  return StaticLinearList_GetAt(0, list);
+}
+
+RECORD* StaticLinearList_GetLast(STATIC_LINEAR_LIST* list) {
+  return StaticLinearList_GetAt(list->size - 1, list);
+}
+
 int _getPosition(STATIC_LINEAR_LIST* list, ID_KEY searchKey, bool isSorted) {
   int position;
   if (isSorted) position = StaticLinearList_BinarySearch(list, searchKey);
