@@ -9,17 +9,9 @@ Version: 0.1.0
 #include<stdlib.h>
 #include<limits.h>
 #include<stdbool.h>
+#include "record.h"
 #define MAX_LENGTH 10000
 #define INVALID_POSITION -1
-
-// Defination of ID_KEY type for the key of the one record it's used to get access to an record without deal with entire record data
-typedef int ID_KEY;
-
-// Defination of RECORD type, it's a struct that contains our record data
-typedef struct{
-  ID_KEY key;
-  // Other fields
-} RECORD;
 
 typedef struct{
   // Array of records, it's have MAX_LENGTH+1 to use sentinel linear search
