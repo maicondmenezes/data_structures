@@ -144,15 +144,21 @@ void test_insertInOrder_empty_list() {
     // Add more assertions as needed, such as verifying the actual order of elements in the list
 }
 
-void test_getAt() {
+void test_getAt_success() {
     int position = 0;
     RECORD* item = StaticLinearList_GetAt(position, &globalList);
     CU_ASSERT_PTR_NOT_NULL(item);
     CU_ASSERT_EQUAL(item->key, knownKey);
 }
 
+void test_getByKey_success() {
+    RECORD* item = StaticLinearList_GetByKey(knownKey, &globalList, true);
+    CU_ASSERT_PTR_NOT_NULL(item);
+    CU_ASSERT_EQUAL(item->key, knownKey);
+}
+
 void test_removeByKey() {
-    RECORD* removedItem = StaticLinearList_RemoveByKey(knownKey, &globalList);
+    RECORD* removedItem = StaticLinearList_RemoveByKey(knownKey, &globalList, true);
     CU_ASSERT_EQUAL(removedItem->key, knownKey);
     CU_ASSERT_EQUAL(StaticLinearList_LinearSearch(&globalList, knownKey), -1);
     CU_ASSERT_EQUAL(StaticLinearList_GetSize(&globalList), SAMPLES_AMOUNT);
@@ -193,7 +199,8 @@ int main() {
     CU_add_test(pSuite, "test_binarySearch_unknownItem", test_binarySearch_unknownItem);
     CU_add_test(pSuite, "test_insertInPosition_empty_list", test_insertAt_empty_list);
     CU_add_test(pSuite, "test_insertInOrder_empty_list", test_insertInOrder_empty_list);
-    CU_add_test(pSuite, "test_getAt", test_getAt);
+    CU_add_test(pSuite, "test_getAt_success", test_getAt_success);
+    CU_add_test(pSuite, "test_getByKey_success", test_getByKey_success);
     CU_add_test(pSuite, "test_removeByKey", test_removeByKey);
     CU_add_test(pSuite, "test_removeAt", test_removeAt);
 

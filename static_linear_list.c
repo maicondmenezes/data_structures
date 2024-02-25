@@ -81,8 +81,21 @@ RECORD* StaticLinearList_GetAt(int position, STATIC_LINEAR_LIST* list) {
   return &(list->A[position]);
 }
 
-RECORD* StaticLinearList_RemoveByKey(ID_KEY removedItem, STATIC_LINEAR_LIST* list) {    
-    int position = StaticLinearList_BinarySearch(list, removedItem);
+int _getPosition(STATIC_LINEAR_LIST* list, ID_KEY searchKey, bool isSorted) {
+  int position;
+  if (isSorted) position = StaticLinearList_BinarySearch(list, searchKey);
+  else position = StaticLinearList_LinearSearch(list, searchKey);
+  return position;
+}
+
+RECORD* StaticLinearList_GetByKey(ID_KEY searchKey, STATIC_LINEAR_LIST* list, bool isSorted) {
+  int position = _getPosition(list, searchKey, isSorted);
+  if (position == -1) return NULL;
+  return &(list->A[position]);
+}
+
+RECORD* StaticLinearList_RemoveByKey(ID_KEY removedItem, STATIC_LINEAR_LIST* list, bool isSorted) {
+    int position = _getPosition(list, removedItem, isSorted);  
     if (position == -1) return NULL;
 
     RECORD* removedRecord = (RECORD*)malloc(sizeof(RECORD));

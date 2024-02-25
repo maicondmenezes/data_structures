@@ -134,15 +134,27 @@ bool StaticLinearList_InsertInOrder(STATIC_LINEAR_LIST* list, RECORD item);
 */
 RECORD* StaticLinearList_GetAt(int position, STATIC_LINEAR_LIST* list);
 
+/* Funcion StaticLinearList_GetByKey
+  Description: This function is used to get a record from the list using it's key
+  Parameters:
+    ID_KEY searchedKey: The key of the record that will be get
+    STATIC_LINEAR_LIST* list: Pointer to the list that will be get the record
+    bool isSorted: If the list is sorted, the function uses binary search, otherwise, the function uses linear search
+  Return:
+    *RECORD: Pointer to the record that was get or NULL if the record was not found
+*/
+RECORD* StaticLinearList_GetByKey(ID_KEY searchedKey, STATIC_LINEAR_LIST* list, bool isSorted);
+
 /* Function: StaticLinearList_RemoveByKey
   Description: This function is used to remove a record from the list
   Parameters:
     ID_KEY removedItem: The key of the record that will be removed
     STATIC_LINEAR_LIST* list: Pointer to the list that will be removed the record
+    bool isSorted: If the list is sorted, the function uses binary search, otherwise, the function uses linear search
   Return:
     RECORD: Pointer to the record that was removed or NULL if the record was not found
 */
-RECORD* StaticLinearList_RemoveByKey(ID_KEY removedItem, STATIC_LINEAR_LIST* list);
+RECORD* StaticLinearList_RemoveByKey(ID_KEY removedItem, STATIC_LINEAR_LIST* list, bool isSorted);
 
 /* Function: StaticLinearList_RemoveAt
   Description: This function is used to remove a record from the list
