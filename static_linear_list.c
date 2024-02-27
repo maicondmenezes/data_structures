@@ -16,7 +16,7 @@ bool SataticLinearList_isEmpty(STATIC_LINEAR_LIST* list) {
   return list->size == 0;
 }
 
-void StaticLinearList_print(STATIC_LINEAR_LIST* list) {
+void StaticLinearList_Print(STATIC_LINEAR_LIST* list) {
   int index;
   printf("List: [ ");
   for (index=0; index < list->size; index++)

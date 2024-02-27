@@ -3,7 +3,7 @@ Description: This file implements Linear List using static memory allocation.
 
 Author: Maicon de Menezes
 Creation Date: 21/02/2024
-Version: 0.1.0
+Version: 0.2.0
 */
 #include<stdio.h>
 #include<stdlib.h>
@@ -55,14 +55,14 @@ bool StaticLinearList_IsFull(STATIC_LINEAR_LIST* list);
 */
 bool SataticLinearList_isEmpty(STATIC_LINEAR_LIST* list);
 
-/* Function: StaticLinearList_print
+/* Function: StaticLinearList_Print
   Description: This function is used to print the list
   Parameters:
     STATIC_LINEAR_LIST* list: Pointer to the list that will be printed
   Return:
     void
 */
-void StaticLinearList_print(STATIC_LINEAR_LIST* list);
+void StaticLinearList_Print(STATIC_LINEAR_LIST* list);
 
 /* Function: StaticLinearList_LinearSearch
   Description: This function is used to search for a record in the list

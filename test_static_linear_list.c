@@ -192,7 +192,7 @@ int main() {
         return CU_get_error();
 
     // Add a suite to the registry
-    CU_pSuite pSuite = CU_add_suite("test_startArrayList_initializes_empty_list", init_suite, clean_suite);
+    CU_pSuite pSuite = CU_add_suite("StaticLinearList Unit Test", init_suite, clean_suite);
     if (NULL == pSuite) {
         CU_cleanup_registry();
         return CU_get_error();
